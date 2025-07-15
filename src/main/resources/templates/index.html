@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <div class="container">
+    <h1>Simple Calculator</h1>
+    <form th:action="@{/calculate}" method="post" th:object="${calculatorForm}">
+        <input type="number" step="any" th:field="*{number1}" placeholder="Enter first number" required>
+        <select th:field="*{operation}">
+            <option value="add">+</option>
+            <option value="subtract">−</option>
+            <option value="multiply">×</option>
+            <option value="divide">÷</option>
+        </select>
+        <input type="number" step="any" th:field="*{number2}" placeholder="Enter second number" required>
+        <button type="submit">Calculate</button>
+    </form>
+
+    <div class="result" th:if="${calculatorForm.result != 0 or calculatorForm.operation != null}">
+        <p>Result: <span th:text="${calculatorForm.result}"></span></p>
+    </div>
+
+    <div class="error" th:if="${error}">
+        <p th:text="${error}"></p>
+    </div>
+</div>
+
+    
+</body>
+</html>
